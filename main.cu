@@ -9,14 +9,18 @@
 #include <iostream>
 #include <stdio.h>
 
-#include "include/cuda/globalMemory_kernel.cuh"
+#include "include/cuda/global_kernel.cuh"
 #include "print.h"
-#include "include/swapCA.h"
-#include "include/init.h"
-
+#include "include/core/swapCA.h"
+#include "include/core/init.h"
+#include "include/cuda/run_kernels.cuh"
+#include "include/core/kernelMode.h"
 
 int main()
 {
+    KernelMode mode = KernelMode::GLOBAL;   // o TILED o TILED_HALO
+
+
 
     // unsigned => only 0 or positive values
     const unsigned int nSteps = 10000;
@@ -88,8 +92,26 @@ int main()
         cudaMemcpy(d_temperatureNext, temperatureNext , size, cudaMemcpyHostToDevice);
 
 
+        switch(mode)
+        {
+        case KernelMode::GLOBAL:
+            runGlobal(d_temperatureCurrent, d_temperatureNext, numBlocks,
+                      blockSize, cols, rows, nHotBottomRows, nHotTopRows);
+            break;
+
+        case KernelMode::TILED:
+            runTiled(d_temperatureCurrent, d_temperatureNext, numBlocks,
+                     blockSize, cols, rows);
+            break;
+
+        case KernelMode::TILED_HALO:
+            runTiledHalo(d_temperatureCurrent, d_temperatureNext, numBlocks,
+                         blockSize, cols, rows);
+            break;
+        }
+
         // use the cuda kernel to perform the calculations
-        globalMemory_kernel<<<numBlocks,blockSize>>>(d_temperatureCurrent,d_temperatureNext, cols, rows , nHotBottomRows, nHotTopRows);
+        global_kernel<<<numBlocks,blockSize>>>(d_temperatureCurrent,d_temperatureNext, cols, rows , nHotBottomRows, nHotTopRows);
 
         cudaMemcpy(temperatureCurrent, d_temperatureCurrent,size, cudaMemcpyDeviceToHost);
         cudaMemcpy(temperatureNext, d_temperatureNext, size, cudaMemcpyDeviceToHost);

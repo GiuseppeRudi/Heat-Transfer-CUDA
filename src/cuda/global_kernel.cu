@@ -2,10 +2,10 @@
 // Created by giu20 on 15/11/2025.
 //
 
-#include "../../../include/cuda/globalMemory_kernel.cuh"
+#include "../../include/cuda/global_kernel.cuh"
 
 __global__
-void globalMemory_kernel(
+void global_kernel(
     double* temperatureCurrent,
     double* temperatureNext,
     unsigned int cols,

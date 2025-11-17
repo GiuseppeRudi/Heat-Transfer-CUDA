@@ -6,13 +6,21 @@ set(CMAKE_CUDA_STANDARD 20)
 add_executable(Heat_Transfer_CUDA
         main.cu
         src/core/init.cpp
-        include/init.h
+        include/core/init.h
         src/utils/print.cpp
         include/print.h
-        src/cuda/globalMemoryVersion/globalMemory_kernel.cu
-        include/cuda/globalMemory_kernel.cuh
+        src/cuda/global_kernel.cu
+        include/cuda/global_kernel.cuh
         src/core/swapCA.cpp
-        include/swapCA.h)
+        include/core/swapCA.h
+        include/core/kernelMode.h
+        src/cuda/run_kernels.cu
+        include/cuda/run_kernels.cuh
+        src/cuda/tiled_kernel.cu
+        include/cuda/tiled_kernel.cuh
+        src/cuda/tiledHalo_kernel.cu
+        include/cuda/tiledHalo_kernel.cuh
+)
 
 
 target_include_directories(Heat_Transfer_CUDA PRIVATE

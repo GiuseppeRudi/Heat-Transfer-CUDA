@@ -5,7 +5,7 @@
 #pragma once
 
 __global__
-void globalMemory_kernel(
+void global_kernel(
     double* temperatureCurrent,
     double* temperatureNext,
     unsigned int cols,
