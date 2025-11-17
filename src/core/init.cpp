@@ -2,7 +2,7 @@
 // Created by giu20 on 15/11/2025.
 //
 
-#include "../include/init.h"
+#include "../../include/init.h"
 
 void inizializeMatrix(double* temperatureMatrix,
                       unsigned int rows,

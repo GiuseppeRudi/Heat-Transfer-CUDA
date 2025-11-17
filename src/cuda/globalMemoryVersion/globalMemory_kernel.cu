@@ -2,10 +2,10 @@
 // Created by giu20 on 15/11/2025.
 //
 
-#include "heatTransfer_kernel.cuh"
+#include "../../../include/cuda/globalMemory_kernel.cuh"
 
 __global__
-void heatTransfer_kernel(
+void globalMemory_kernel(
     double* temperatureCurrent,
     double* temperatureNext,
     unsigned int cols,

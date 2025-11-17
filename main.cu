@@ -9,10 +9,10 @@
 #include <iostream>
 #include <stdio.h>
 
-#include "heatTransfer_kernel.cuh"
+#include "include/cuda/globalMemory_kernel.cuh"
 #include "print.h"
-#include "swapCA.h"
-#include "../include/init.h"
+#include "include/swapCA.h"
+#include "include/init.h"
 
 
 int main()
@@ -89,7 +89,7 @@ int main()
 
 
         // use the cuda kernel to perform the calculations
-        heatTransfer_kernel<<<numBlocks,blockSize>>>(d_temperatureCurrent,d_temperatureNext, cols, rows , nHotBottomRows, nHotTopRows);
+        globalMemory_kernel<<<numBlocks,blockSize>>>(d_temperatureCurrent,d_temperatureNext, cols, rows , nHotBottomRows, nHotTopRows);
 
         cudaMemcpy(temperatureCurrent, d_temperatureCurrent,size, cudaMemcpyDeviceToHost);
         cudaMemcpy(temperatureNext, d_temperatureNext, size, cudaMemcpyDeviceToHost);

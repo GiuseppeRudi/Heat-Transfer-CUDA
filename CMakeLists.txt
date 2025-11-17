@@ -4,15 +4,15 @@ project(Heat_Transfer_CUDA LANGUAGES CXX CUDA)
 set(CMAKE_CUDA_STANDARD 20)
 
 add_executable(Heat_Transfer_CUDA
-        src/main.cu
-        src/init.cpp
+        main.cu
+        src/core/init.cpp
         include/init.h
-        src/print.cpp
+        src/utils/print.cpp
         include/print.h
-        src/heatTransfer_kernel.cu
-        src/heatTransfer_kernel.cuh
-        src/swapCA.cpp
-        src/swapCA.h)
+        src/cuda/globalMemoryVersion/globalMemory_kernel.cu
+        include/cuda/globalMemory_kernel.cuh
+        src/core/swapCA.cpp
+        include/swapCA.h)
 
 
 target_include_directories(Heat_Transfer_CUDA PRIVATE

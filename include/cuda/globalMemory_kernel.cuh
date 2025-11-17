@@ -5,7 +5,7 @@
 #pragma once
 
 __global__
-void heatTransfer_kernel(
+void globalMemory_kernel(
     double* temperatureCurrent,
     double* temperatureNext,
     unsigned int cols,

@@ -1,0 +1,113 @@
+###############################
+# GENERAL
+###############################
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+###############################
+# BUILD SYSTEMS (CMake, Ninja, Make)
+###############################
+/build/
+/cmake-build-debug/
+/cmake-build-release/
+/cmake-build-*/
+/CMakeFiles/
+/CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+Testing/
+CTestTestfile.cmake
+
+###############################
+# CLION / INTELLIJ
+###############################
+.idea/
+*.iml
+out/
+
+###############################
+# VISUAL STUDIO
+###############################
+.vs/
+*.vcxproj*
+*.sln
+*.user
+*.filters
+Debug/
+Release/
+x64/
+bin/
+obj/
+ipch/
+*.pdb
+*.ilk
+*.iobj
+*.ipdb
+
+###############################
+# VISUAL STUDIO CODE
+###############################
+.vscode/
+*.code-workspace
+
+###############################
+# CUDA / NVCC
+###############################
+*.cubin
+*.fatbin
+*.ptx
+*.sass
+*.o
+*.obj
+*.linkinfo
+*.d
+
+###############################
+# COMPILATION OUTPUTS (C/C++)
+###############################
+*.o
+*.obj
+*.so
+*.a
+*.la
+*.lo
+*.dll
+*.exe
+*.out
+*.app
+
+###############################
+# TESTING / COVERAGE
+###############################
+*.gcda
+*.gcno
+*.gcov
+coverage/
+coverage.info
+
+###############################
+# PYTHON (se usi script)
+###############################
+__pycache__/
+*.pyc
+*.pyo
+
+###############################
+# LOG / DATA / TEMP
+###############################
+*.dat
+*.csv
+*.bin
+*.npy
+*.npz
+results/
+logs/
+temp/
