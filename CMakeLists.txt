@@ -6,8 +6,8 @@ project(Heat_Transfer_CUDA LANGUAGES CXX CUDA)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Standard CUDA (per i .cu) – se usi CUDA recente puoi lasciare 20,
-# altrimenti metti 17 o 14 a seconda della toolchain
+# Standard CUDA (for .cu) – if use recent CUDA toolkit use 20 instead of 17
+# if work with very old cuda version try to insert 14
 set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 
