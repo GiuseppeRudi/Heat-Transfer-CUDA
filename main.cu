@@ -2,23 +2,22 @@
 // Created by giu20 on 15/11/2025.
 //
 
-#include <functional>
-
 #include "cuda_runtime.h"
 #include "malloc.h"
 #include <iostream>
 #include <stdio.h>
-
 #include "include/cuda/global_kernel.cuh"
 #include "print.h"
 #include "include/core/swapCA.h"
 #include "include/core/init.h"
 #include "include/cuda/run_kernels.cuh"
 #include "include/core/kernelMode.h"
+using namespace std;
+
 
 int main()
 {
-    KernelMode mode = KernelMode::GLOBAL;   // o TILED o TILED_HALO
+    KernelMode mode = KernelMode::TILED_HALO;
 
 
 
@@ -55,15 +54,15 @@ int main()
     }
 
     unsigned int fieldWidth{ 5 };
-    std::string outfilePrefix{ "temperature" };
-    std::string outfileExtension{ ".dat" };
+    string outfilePrefix{ "temperature" };
+    string outfileExtension{ ".dat" };
 
     inizializeMatrix(temperatureCurrent, rows, cols, nHotBottomRows, nHotTopRows, temperature);
     inizializeMatrix(temperatureNext, rows, cols, nHotBottomRows, nHotTopRows, temperature);
 
-    std::cout << "Saving initial configuration... " << std::endl;
+    cout << "Saving initial configuration... " << endl;
     saveTemperature(outfilePrefix, outfileExtension, currentStep, temperatureCurrent, rows, cols, fieldWidth);
-    std::cout << "Done" << std::endl;
+    cout << "Done" << endl;
 
     // create a device pointer memory
     double* d_temperatureCurrent;
@@ -95,18 +94,18 @@ int main()
         switch(mode)
         {
         case KernelMode::GLOBAL:
-            runGlobal(d_temperatureCurrent, d_temperatureNext, numBlocks,
-                      blockSize, cols, rows, nHotBottomRows, nHotTopRows);
+            runGlobal(d_temperatureCurrent, d_temperatureNext, blockSize,
+                      numBlocks, cols, rows, nHotBottomRows, nHotTopRows);
             break;
 
         case KernelMode::TILED:
-            runTiled(d_temperatureCurrent, d_temperatureNext, numBlocks,
-                     blockSize, cols, rows);
+            runTiled(d_temperatureCurrent, d_temperatureNext, blockSize,
+                     numBlocks, nHotBottomRows, nHotTopRows, cols, rows);
             break;
 
         case KernelMode::TILED_HALO:
             runTiledHalo(d_temperatureCurrent, d_temperatureNext, numBlocks,
-                         blockSize, cols, rows);
+                         blockSize, cols, rows,nHotBottomRows,nHotTopRows);
             break;
         }
 
@@ -121,9 +120,9 @@ int main()
 
     }
 
-    std::cout << "Saving final configuration... " << std::endl;
+    cout << "Saving final configuration... " << endl;
     saveTemperature(outfilePrefix, outfileExtension, nSteps, temperatureCurrent, rows, cols, fieldWidth);
-    std::cout << "Done" << std::endl;
+    cout << "Done" << endl;
 
     //// Add vectors in parallel.
     //cudaError_t cudaStatus = addWithCuda(c, a, b, arraySize);

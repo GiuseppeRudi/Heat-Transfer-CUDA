@@ -21,6 +21,8 @@ void runTiled(double* d_curr ,
     double* d_next ,
     dim3 blockSize ,
     dim3 numBlock,
+    unsigned int nHotBottomRows,
+    unsigned int nHotTopRows,
     unsigned int cols,
     unsigned int rows);
 
@@ -31,4 +33,6 @@ void runTiledHalo(double* d_curr ,
     dim3 blockSize ,
     dim3 numBlock,
     unsigned int cols,
-    unsigned int rows);
+    unsigned int rows,
+    unsigned int nHotBottomRows,
+    unsigned int nHotTopRows);

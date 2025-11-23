@@ -4,8 +4,10 @@
 #pragma once
 
 __global__
-void tile_kernel(
+void tiled_kernel(
     double* temperatureCurrent,
     double* temperatureNext,
     unsigned int cols,
-    unsigned int rows);
+    unsigned int rows,
+    unsigned int nHotBottomRows,
+    unsigned int nHotTopRows);

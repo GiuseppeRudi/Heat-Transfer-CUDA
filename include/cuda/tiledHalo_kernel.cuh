@@ -5,8 +5,10 @@
 #pragma once
 
 __global__
-void tileHalo_kernel(
+void tiledHalo_kernel(
     double* temperatureCurrent,
     double* temperatureNext,
     unsigned int cols,
-    unsigned int rows);
+    unsigned int rows,
+    unsigned int nHotBottomRows,
+    unsigned int nHotTopRows);
